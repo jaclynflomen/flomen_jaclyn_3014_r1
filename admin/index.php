@@ -35,7 +35,7 @@
     echo 'Last Log In: ';
 
     $timezone  = -5; //(GMT -5:00) EST (U.S. & Canada) 
-    echo gmdate("Y/m/j H:i", time() + 3600*($timezone+date("I")));
+    echo gmdate("Y/m/j H:i", time() + 3600*($timezone+date()));
     ?>
 
 
