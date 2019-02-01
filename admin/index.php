@@ -29,23 +29,15 @@
         </ul>
     </nav>
 
+
     <?php
-    
+    setCookie('user_date', date("F j, Y, g:i a"),time()+60*60*24*365);
+    echo 'Last Log In: ';
+
     $timezone  = -5; //(GMT -5:00) EST (U.S. & Canada) 
     echo gmdate("Y/m/j H:i", time() + 3600*($timezone+date("I")));
     ?>
 
-<?php
-if(isset($_COOKIE['user_date']))
-{
-    $user_date = "<p>Your last visit was on ".$_COOKIE['user_date'];
-}
-else
-{
-    $lastVisit = "<p>This is your first visit!</p>";    
-}
-setcookie('user_date', date("F j, Y, g:i a"),time()+60*60*24*365);
-?>
 
     <p><?php 
     $hour = date('H');
