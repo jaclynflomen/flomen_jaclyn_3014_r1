@@ -31,17 +31,23 @@
 
 
     <?php
-    setCookie('user_date', date("F j, Y, g:i a"),time()+60*60*24*365);
-    echo 'Last Log In: ';
+    echo 'Last Log In: '; //formatting
+    $timezone = -5; //align with timezone
 
-    $timezone  = -5; //(GMT -5:00) EST (U.S. & Canada) 
-    echo gmdate("Y/m/j H:i", time() + 3600*($timezone+date()));
+    $cookie = ($_COOKIE['user_date'] + $timezone);
+    $cookie_value = "SELECT * FROM tbl_users WHERE user_date = ".$cookie;
+    setcookie($cookie_value, time());
+    
+    if(!isset($_COOKIE[$cookie_value])) {
+        echo gmdate("Y/m/j H:i", time() + 3600*$cookie); //this is for formatting
+    }
+
     ?>
 
 
     <p><?php 
     $hour = date('H');
-    $dayTime = ($hour > 17) ? "Evening" : ($hour < 12) ? "Morning" : "Afternoon";
+    $dayTime = ($hour > 17) ? "Evening" : ($hour > 12) ? "Afternoon" : "Morning"; //switches for each time of day
     echo "Good " . $dayTime; 
     ?></p>
 </body>
