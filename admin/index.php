@@ -29,12 +29,28 @@
         </ul>
     </nav>
 
-    <p>Last Log In: <?php echo $_SESSION['user_date']; ?></p>
+    <?php
+    
+    $timezone  = -5; //(GMT -5:00) EST (U.S. & Canada) 
+    echo gmdate("Y/m/j H:i", time() + 3600*($timezone+date("I")));
+    ?>
+
+<?php
+if(isset($_COOKIE['user_date']))
+{
+    $user_date = "<p>Your last visit was on ".$_COOKIE['user_date'];
+}
+else
+{
+    $lastVisit = "<p>This is your first visit!</p>";    
+}
+setcookie('user_date', date("F j, Y, g:i a"),time()+60*60*24*365);
+?>
 
     <p><?php 
     $hour = date('H');
-    $dayTerm = ($hour > 17) ? "Evening" : ($hour > 12) ? "Afternoon" : "Morning";
-    echo "Good " . $dayTerm; 
+    $dayTime = ($hour > 17) ? "Evening" : ($hour < 12) ? "Morning" : "Afternoon";
+    echo "Good " . $dayTime; 
     ?></p>
 </body>
 </html>
